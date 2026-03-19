@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Berk Gozek</title><description>Resume and Portfolio</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>Cloud Log Analyzer</title><link>https://fuwari.vercel.app/posts/cloud-log-analyzer/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/cloud-log-analyzer/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Python CLI tool that parses web server logs and generates traffic and error reports.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Berk Gozek</title><description>Resume and Portfolio</description><link>https://berkgozek.com/</link><language>en</language><item><title>Cloud Log Analyzer</title><link>https://berkgozek.com/posts/cloud-log-analyzer/</link><guid isPermaLink="true">https://berkgozek.com/posts/cloud-log-analyzer/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Python CLI tool that parses web server logs and generates traffic and error reports.&lt;/p&gt;
 &lt;h2&gt;Features&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Parses server log files&lt;/li&gt;
@@ -109,7 +109,7 @@ source .venv/bin/activate
 &lt;li&gt;Add command-line arguments for custom input files&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;::github{repo=&quot;berkgozek/cloud-log-analyzer&quot;}&lt;/p&gt;
-</content:encoded></item><item><title>Cloud EC2 Monitor</title><link>https://fuwari.vercel.app/posts/cloud-ec2-monitor/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/cloud-ec2-monitor/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Python CLI tool that retrieves AWS EC2 instance information and generates simple usage reports for monitoring cloud environments.&lt;/p&gt;
+</content:encoded></item><item><title>Cloud EC2 Monitor</title><link>https://berkgozek.com/posts/cloud-ec2-monitor/</link><guid isPermaLink="true">https://berkgozek.com/posts/cloud-ec2-monitor/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Python CLI tool that retrieves AWS EC2 instance information and generates simple usage reports for monitoring cloud environments.&lt;/p&gt;
 &lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;This project demonstrates basic cloud infrastructure monitoring using the AWS SDK for Python (&lt;code&gt;boto3&lt;/code&gt;). The tool queries EC2 instances and reports information such as instance IDs, current status, and launch time.&lt;/p&gt;
 &lt;p&gt;The goal of the project is to explore how infrastructure engineers and developers interact with cloud APIs to inspect and monitor computing resources.&lt;/p&gt;
@@ -185,7 +185,7 @@ Launch Time: 2026-03-10T14:22:31Z
 &lt;li&gt;Integration with monitoring dashboards&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;::github{repo=&quot;berkgozek/cloud-ec2-monitor&quot;}&lt;/p&gt;
-</content:encoded></item><item><title>Kenneth Martin</title><link>https://fuwari.vercel.app/posts/kenneth-martin/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/kenneth-martin/</guid><pubDate>Tue, 12 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;One of Kenneth Martin&apos;s Works recreated and Animated for AP Computer Science Principles @ Hisar School 2023-2024&lt;/p&gt;
+</content:encoded></item><item><title>Kenneth Martin</title><link>https://berkgozek.com/posts/kenneth-martin/</link><guid isPermaLink="true">https://berkgozek.com/posts/kenneth-martin/</guid><pubDate>Tue, 12 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;One of Kenneth Martin&apos;s Works recreated and Animated for AP Computer Science Principles @ Hisar School 2023-2024&lt;/p&gt;
 &lt;p&gt;This project is Kenneth Martin&apos;s 1977 work &quot;Rotation ‘Frankfurt’ III&quot; recreated and animated.&lt;/p&gt;
 &lt;p&gt;This project was made in Playgrounds using SwiftUI.&lt;/p&gt;
 &lt;h2&gt;The art piece &quot;Rotation ‘Frankfurt’ III&quot;&lt;/h2&gt;
