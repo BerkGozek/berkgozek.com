@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Berk Gozek</title><description>Resume and Portfolio</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>Cloud Log Analyzer</title><link>https://fuwari.vercel.app/posts/cloud-log-analyzer/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/cloud-log-analyzer/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Python CLI tool that parses web server logs and generates traffic and error reports.&lt;/p&gt;
+&lt;h2&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Parses server log files&lt;/li&gt;
+&lt;li&gt;Extracts IP address, HTTP method, endpoint, and status code&lt;/li&gt;
+&lt;li&gt;Summarizes HTTP status codes&lt;/li&gt;
+&lt;li&gt;Identifies most frequently requested endpoints&lt;/li&gt;
+&lt;li&gt;Detects client errors (4xx) and server errors (5xx)&lt;/li&gt;
+&lt;li&gt;Displays results in formatted CLI tables using Rich&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Technologies Used&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Rich&lt;/li&gt;
+&lt;li&gt;Regular Expressions (&lt;code&gt;re&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Collections (&lt;code&gt;Counter&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Project Structure&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;cloud-log-analyzer/
+├── analyze_logs.py
+├── sample.log
+├── requirements.txt
+├── README.md
+└── .gitignore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;h3&gt;1. Clone the repository:&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/berkgozek/cloud-log-analyzer.git
+cd cloud-log-analyzer
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. Create and activate a virtual environment:&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;python3 -m venv .venv
+source .venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. Install Dependencies&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;pip install -r requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Run the Project&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;python analyze_logs.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Example Output&lt;/h2&gt;
+&lt;p&gt;The program generates:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a parsed log table&lt;/li&gt;
+&lt;li&gt;HTTP status code summary&lt;/li&gt;
+&lt;li&gt;top endpoints&lt;/li&gt;
+&lt;li&gt;client error report&lt;/li&gt;
+&lt;li&gt;server error report&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Cloud Log Analysis Report
+
+               Parsed Log Entries               
+┏━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ IP Address   ┃ Method ┃ Path        ┃ Status ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━┩
+│ 192.168.1.10 │ GET    │ /index.html │    200 │
+│ 192.168.1.11 │ GET    │ /login      │    401 │
+│ 192.168.1.10 │ POST   │ /login      │    200 │
+│ 192.168.1.12 │ GET    │ /dashboard  │    500 │
+│ 192.168.1.10 │ GET    │ /profile    │    200 │
+│ 192.168.1.13 │ GET    │ /unknown    │    404 │
+└──────────────┴────────┴─────────────┴────────┘
+
+   HTTP Status Code    
+        Summary        
+┏━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Status Code ┃ Count ┃
+┡━━━━━━━━━━━━━╇━━━━━━━┩
+│         200 │     3 │
+│         401 │     1 │
+│         404 │     1 │
+│         500 │     1 │
+└─────────────┴───────┘
+
+      Top Endpoints       
+┏━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃ Endpoint    ┃ Requests ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│ /login      │        2 │
+│ /index.html │        1 │
+│ /dashboard  │        1 │
+│ /profile    │        1 │
+│ /unknown    │        1 │
+└─────────────┴──────────┘
+
+             Client Errors (4xx)             
+┏━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Status ┃ Method ┃ Path     ┃ IP Address   ┃
+┡━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│    401 │ GET    │ /login   │ 192.168.1.11 │
+│    404 │ GET    │ /unknown │ 192.168.1.13 │
+└────────┴────────┴──────────┴──────────────┘
+
+              Server Errors (5xx)              
+┏━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Status ┃ Method ┃ Path       ┃ IP Address   ┃
+┡━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│    500 │ GET    │ /dashboard │ 192.168.1.12 │
+└────────┴────────┴────────────┴──────────────┘
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Use Case&lt;/h2&gt;
+&lt;p&gt;This project simulates a lightweight cloud / DevOps monitoring utility for analyzing server traffic and identifying errors in log files.&lt;/p&gt;
+&lt;h2&gt;Future Improvements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Support multiple log files&lt;/li&gt;
+&lt;li&gt;Export reports to CSV&lt;/li&gt;
+&lt;li&gt;Detect suspicious IP activity&lt;/li&gt;
+&lt;li&gt;Add command-line arguments for custom input files&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;::github{repo=&quot;berkgozek/cloud-log-analyzer&quot;}&lt;/p&gt;
+</content:encoded></item><item><title>Cloud EC2 Monitor</title><link>https://fuwari.vercel.app/posts/cloud-ec2-monitor/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/cloud-ec2-monitor/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Python CLI tool that retrieves AWS EC2 instance information and generates simple usage reports for monitoring cloud environments.&lt;/p&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This project demonstrates basic cloud infrastructure monitoring using the AWS SDK for Python (&lt;code&gt;boto3&lt;/code&gt;). The tool queries EC2 instances and reports information such as instance IDs, current status, and launch time.&lt;/p&gt;
+&lt;p&gt;The goal of the project is to explore how infrastructure engineers and developers interact with cloud APIs to inspect and monitor computing resources.&lt;/p&gt;
+&lt;h2&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Retrieve EC2 instance metadata&lt;/li&gt;
+&lt;li&gt;Display instance IDs and instance state&lt;/li&gt;
+&lt;li&gt;Show instance launch time&lt;/li&gt;
+&lt;li&gt;Generate simple usage reports&lt;/li&gt;
+&lt;li&gt;Command-line interface for quick infrastructure inspection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Technologies Used&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;AWS EC2&lt;/li&gt;
+&lt;li&gt;boto3 (AWS SDK for Python)&lt;/li&gt;
+&lt;li&gt;AWS CLI&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Project Structure&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;cloud-ec2-monitor/
+│
+├── monitor.py
+├── usage_report.txt
+├── requirements.txt
+├── README.md
+└── .gitignore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;h3&gt;1. Clone the repository&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/BerkGozek/cloud-monitor.git
+cd cloud-monitor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. Create a virtual environment&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;python3 -m venv .venv
+source .venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. Install dependencies&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;pip install -r requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4. Configure AWS credentials&lt;/h3&gt;
+&lt;p&gt;Before running the tool, configure AWS CLI credentials:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;aws configure
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will be prompted to enter:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AWS Access Key ID
+AWS Secret Access Key
+Default region name (example: us-east-1)
+Default output format (json recommended)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Running the Tool&lt;/h2&gt;
+&lt;p&gt;Run the monitoring script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python monitor.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To generate a usage report file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python monitor.py &amp;gt; usage_report.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Example Output&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;Instance ID: i-0123456789abcdef0
+Status: running
+Launch Time: 2026-03-10T14:22:31Z
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Use Case&lt;/h2&gt;
+&lt;p&gt;This tool simulates a lightweight infrastructure monitoring workflow used by cloud engineers and DevOps teams to inspect compute resources in a cloud environment.&lt;/p&gt;
+&lt;p&gt;It demonstrates how developers can use Python to interact with cloud APIs and retrieve operational data from infrastructure services.&lt;/p&gt;
+&lt;h2&gt;Future Improvements&lt;/h2&gt;
+&lt;p&gt;Potential improvements for this project include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for additional AWS services (S3, Lambda, RDS)&lt;/li&gt;
+&lt;li&gt;Automatic report generation and logging&lt;/li&gt;
+&lt;li&gt;Monitoring alerts for instance state changes&lt;/li&gt;
+&lt;li&gt;Command-line arguments for filtering or selecting regions&lt;/li&gt;
+&lt;li&gt;Integration with monitoring dashboards&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;::github{repo=&quot;berkgozek/cloud-ec2-monitor&quot;}&lt;/p&gt;
+</content:encoded></item><item><title>Kenneth Martin</title><link>https://fuwari.vercel.app/posts/kenneth-martin/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/kenneth-martin/</guid><pubDate>Tue, 12 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;One of Kenneth Martin&apos;s Works recreated and Animated for AP Computer Science Principles @ Hisar School 2023-2024&lt;/p&gt;
+&lt;p&gt;This project is Kenneth Martin&apos;s 1977 work &quot;Rotation ‘Frankfurt’ III&quot; recreated and animated.&lt;/p&gt;
+&lt;p&gt;This project was made in Playgrounds using SwiftUI.&lt;/p&gt;
+&lt;h2&gt;The art piece &quot;Rotation ‘Frankfurt’ III&quot;&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/BerkGozek/KennethMartin/main/Screenshots/KM_RF3.jpg&quot; alt=&quot;Frankfurt Rotation&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;App Preview&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Start State of App&lt;/th&gt;
+&lt;th&gt;End State of App&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&quot;https://raw.githubusercontent.com/BerkGozek/KennethMartin/main/Screenshots/Empty.png&quot; alt=&quot;Start&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://raw.githubusercontent.com/BerkGozek/KennethMartin/main/Screenshots/Finished.png&quot; alt=&quot;End&quot; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;App in Motion&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/BerkGozek/KennethMartin/4fad62dbef4c74d6c1824b3bb35e20d958f5faad/Screenshots/KM_RF3_Anim.gif&quot; alt=&quot;KM_3_Anim&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;GeoGebra Graphing&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/BerkGozek/KennethMartin/main/Screenshots/KM_RF3_GG.png&quot; alt=&quot;KM_3_GG&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;The Project Recipe&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Select the art piece you want to recreate and animate&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put that into a Graphing Software such as Geogebra, the image should be placed in the fourth quadrant and its top left corner should be touching the origin point.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Start graphing over the image in the Graphing Software using vectors.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You should end up with something like &lt;a href=&quot;https://www.geogebra.org/calculator/bjx9ymde&quot;&gt;this&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By using the start and end points of the vectors, draw all of the lines under one path class and comment on them the name of the corresponding point in the software.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In your assets, create a color set for every color on the image inside a folder&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Colors in Frankfurt &apos;Rotation&apos; III are
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;span style=&quot;display:inline-block;width:14px;height:14px;background:#73ACBF;border-radius:3px;margin-right:8px;&quot;&amp;gt;&amp;lt;/span&amp;gt; &lt;code&gt;#73ACBF&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;span style=&quot;display:inline-block;width:14px;height:14px;background:#C1E2AC;border-radius:3px;margin-right:8px;&quot;&amp;gt;&amp;lt;/span&amp;gt; &lt;code&gt;#C1E2AC&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;span style=&quot;display:inline-block;width:14px;height:14px;background:#E0818D;border-radius:3px;margin-right:8px;&quot;&amp;gt;&amp;lt;/span&amp;gt; &lt;code&gt;#E0818D&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;span style=&quot;display:inline-block;width:14px;height:14px;background:#EC9B9E;border-radius:3px;margin-right:8px;&quot;&amp;gt;&amp;lt;/span&amp;gt; &lt;code&gt;#EC9B9E&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;span style=&quot;display:inline-block;width:14px;height:14px;background:#F8F9F5;border-radius:3px;margin-right:8px;&quot;&amp;gt;&amp;lt;/span&amp;gt; &lt;code&gt;#F8F9F5&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Start separating them into their own &lt;code&gt;Path&lt;/code&gt; view to give them their own colors&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When you get to separate 10 classes, put them in a group and continue outside the group.&lt;/li&gt;
+&lt;li&gt;SwiftUI only allows 10 separate views to exist at once inside a main.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After separating their Path views and giving them their respective colors, create a &lt;code&gt;@State&lt;/code&gt; &lt;code&gt;CGFloat&lt;/code&gt; variable and give it the value &lt;code&gt;.zero&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add attribute &lt;code&gt;.trim&lt;/code&gt; to each &lt;code&gt;Path&lt;/code&gt; view&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inside the attribute, make it go from 0 to the &lt;code&gt;CGFloat&lt;/code&gt; variable we created.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a button that sets the &lt;code&gt;CGFloat&lt;/code&gt; variable to 1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This will cause the trim attribute to trim the line from 0% to 100%.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;::github{repo=&quot;berkgozek/KennethMartin&quot;}&lt;/p&gt;
+</content:encoded></item></channel></rss>
